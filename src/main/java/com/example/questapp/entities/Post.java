@@ -16,7 +16,7 @@ public class Post {
     //User objesini db'den hemen çekme.
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OnDelete(action = OnDeleteAction.CASCADE) //bir user silindiğinde tüm postları silinir.
     @JsonIgnore
     User user;
 
