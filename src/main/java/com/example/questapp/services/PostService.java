@@ -14,7 +14,7 @@ import java.util.Optional;
 public class PostService {
 
     private PostRepository postRepository;
-    UserService userService;
+    private UserService userService;
 
     public PostService(PostRepository postRepository, UserService userService) {
         this.postRepository = postRepository;
@@ -37,13 +37,13 @@ public class PostService {
        User user = userService.getOneUser(newPostRequest.getUserId());
        if (user == null)
            return null;
-       Post toSave = new Post();
-       toSave.setId(newPostRequest.getId());
-       toSave.setTitle(newPostRequest.getTitle());
-       toSave.setText(newPostRequest.getText());
-       toSave.setUser(user);
+       Post postToSave = new Post();
+       postToSave.setId(newPostRequest.getId());
+       postToSave.setTitle(newPostRequest.getTitle());
+       postToSave.setText(newPostRequest.getText());
+       postToSave.setUser(user);
 
-       return postRepository.save(toSave);
+       return postRepository.save(postToSave);
     }
 
     public Post updateOnePost(Long postId, PostUpdateRequest updatePost) {

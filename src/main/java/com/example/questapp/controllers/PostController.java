@@ -14,7 +14,7 @@ import java.util.Optional;
 @RequestMapping("/posts")
 public class PostController {
 
-    PostService postService;
+    private PostService postService;
 
     public PostController(PostService postService) {
         this.postService = postService;
@@ -32,7 +32,7 @@ public class PostController {
 
     @PostMapping
     public Post createOnePost(@RequestBody PostCreateRequest newPostRequest){
-        return postService.createOnePost(newPostRequest );
+        return postService.createOnePost(newPostRequest);
     }
 
     @PutMapping("/{postId}")
