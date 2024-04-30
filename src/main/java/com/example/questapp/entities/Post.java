@@ -20,6 +20,7 @@ public class Post {
     @JsonIgnore
     User user;
 
+    String title;
     //ColumnDefinition MySQL'in text'i string olarak algilanmasi icin yazildi. aksi takdirde nvarchar olarak algiliyor.
     @Lob
     @Column(columnDefinition = "text")
