@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/posts")
+@CrossOrigin(origins = "http://localhost:3000") //Localhost:3000 is the default address of the frontend server.
 public class PostController {
 
     private PostService postService;
