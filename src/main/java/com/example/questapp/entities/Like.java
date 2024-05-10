@@ -8,10 +8,11 @@ import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Data
-@Table(name = "like")
+@Table(name = "p_like")
 public class Like {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
     //User objesini db'den hemen çekme.

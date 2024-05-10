@@ -1,6 +1,5 @@
 package com.example.questapp.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.OnDelete;
@@ -10,14 +9,15 @@ import org.hibernate.annotations.OnDeleteAction;
 @Data
 @Table(name = "post")
 public class Post {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
     //User objesini db'den hemen çekme.
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE) //bir user silindiğinde tüm postları silinir.
-    @JsonIgnore
     User user;
 
     String title;
