@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.example.questapp.entities.Post;
+import com.example.questapp.entities.User;
+import com.example.questapp.requests.LikeCreateRequest;
 import com.example.questapp.responses.LikeResponse;
 import org.springframework.stereotype.Service;
 
@@ -45,4 +48,16 @@ public class LikeService {
         likeRepository.deleteById(likeId);
     }
 
+    public Like createOneLike(LikeCreateRequest request) {
+        User user = userService.getOneUser(request.getUserId());
+        Post post = postService.getOnePost(request.getPostId());
+        if(user != null && post != null) {
+            Like likeToSave = new Like();
+            likeToSave.setId(request.getId());
+            likeToSave.setPost(post);
+            likeToSave.setUser(user);
+            return likeRepository.save(likeToSave);
+        }else
+            return null;
+    }
 }

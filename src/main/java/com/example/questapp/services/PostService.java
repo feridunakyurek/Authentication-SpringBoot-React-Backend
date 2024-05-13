@@ -7,6 +7,7 @@ import com.example.questapp.requests.PostCreateRequest;
 import com.example.questapp.requests.PostUpdateRequest;
 import com.example.questapp.responses.LikeResponse;
 import com.example.questapp.responses.PostResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,6 +26,11 @@ public class PostService {
         this.userService = userService;
     }
 
+    @Autowired
+    public void setLikeService(LikeService likeService) {
+        this.likeService = likeService;
+    }
+
     public List<PostResponse> getAllPosts(Optional<Long> userId) {
         List<Post> list;
         if(userId.isPresent()){
@@ -32,7 +38,7 @@ public class PostService {
         }
         list = postRepository.findAll();
         return list.stream().map(p -> {
-            List<LikeResponse> likes = likeService.getAllLikesWithParam(null, Optional.of(p.getId()));
+            List<LikeResponse> likes = likeService.getAllLikesWithParam(Optional.ofNullable(null), Optional.of(p.getId()));
             return new PostResponse(p, likes);
         }).collect(Collectors.toList());
     }
